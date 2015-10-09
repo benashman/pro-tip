@@ -18,13 +18,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tipLabel.text = "$0.00"
+        totalLabel.text = "$0.00"
     }
+    
+    @IBAction func onEditingChanged(sender: AnyObject) {
+        var billAmount = NSString(string: billAmountField.text!).doubleValue
+        var tip = billAmount * 0.18
+        var total = billAmount + tip
+        
+        tipLabel.text = String(format: "$%.2f", tip)
+        totalLabel.text = String(format: "$%.2f", total)
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 }
 
