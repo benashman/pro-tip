@@ -19,6 +19,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Auto-focus bill input
+        billAmountField.becomeFirstResponder()
+        
+        // Set default labels
         tipLabel.text = "$0.00"
         totalLabel.text = "$0.00"
     }
