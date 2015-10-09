@@ -45,6 +45,9 @@
                                     <segment title="Good"/>
                                     <segment title="Great"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onEditingChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8JC-EM-9vs"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" id="cv8-fx-NW2">
                                 <rect key="frame" x="210" y="42" width="145" height="30"/>
