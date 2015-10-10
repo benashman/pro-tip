@@ -16,11 +16,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipPercentageControl: UISegmentedControl!
 
+    @IBOutlet weak var tipDetailsView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideTipDetails()
+        
         // Auto-focus bill input
         billAmountField.becomeFirstResponder()
+        
+        // Set placeholder
+        let billAmountPlaceholder = NSAttributedString(string: "$", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
+        billAmountField.attributedPlaceholder = billAmountPlaceholder
         
         // Set default labels
         tipLabel.text = "$0.00"
@@ -35,6 +43,10 @@ class ViewController: UIViewController {
         var tip = billAmount * tipPercentage
         var total = billAmount + tip
         
+        var billFieldCharCount = billAmountField.text!.characters.count
+        
+        billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
+        
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
     }
@@ -43,8 +55,21 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
     
+    func showTipDetails() {
+        tipDetailsView.hidden = false
+    }
+    
+    func hideTipDetails() {
+        tipDetailsView.hidden = true
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 }
 
