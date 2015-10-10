@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var billAmountField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipPercentageControl: UISegmentedControl!
-
+    
+    @IBOutlet weak var billAmountView: UIView!
     @IBOutlet weak var tipDetailsView: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class ViewController: UIViewController {
         
         // Auto-focus bill input
         billAmountField.becomeFirstResponder()
+        billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
         
         // Set placeholder
         let billAmountPlaceholder = NSAttributedString(string: "$", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
@@ -55,12 +58,41 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
     
+    
+    let duration = 0.5
+    let damping = 0.9
+    let velocity: Float = 20
+    let options = UIViewAnimationOptions.CurveEaseOut
+    let billAmountViewEndPosition = CGRect(x: 0, y: 0, width: 375, height: 157)
+    let billAmountViewStartPosition = CGRect(x: 0, y: 294, width: 375, height: 157)
+    
     func showTipDetails() {
         tipDetailsView.hidden = false
+        
+        UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
+            self.billAmountView.frame = self.billAmountViewEndPosition
+             self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:1)
+
+            }, completion: { finished in
+                // any code entered here will be applied
+                // once the animation has completed
+        })
     }
     
     func hideTipDetails() {
         tipDetailsView.hidden = true
+        
+        UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
+            
+            self.billAmountView.frame = self.billAmountViewStartPosition
+            self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
+            
+            
+            }, completion: { finished in
+                // any code entered here will be applied
+                // once the animation has completed
+        })
+
     }
     
     override func prefersStatusBarHidden() -> Bool {

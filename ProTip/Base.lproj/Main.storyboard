@@ -13,11 +13,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="CNx-w8-HNB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="294" width="375" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW MUCH WAS THE BILL?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ovz-ph-A5g">
+                                        <rect key="frame" x="175" y="28" width="180" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" textAlignment="right" minimumFontSize="17" id="cv8-fx-NW2">
-                                        <rect key="frame" x="20" y="45" width="335" height="88"/>
+                                        <rect key="frame" x="20" y="49" width="335" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <animations/>
                                         <color key="tintColor" red="0.42042416102295155" green="0.46808227334786673" blue="0.56202196270179372" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,7 +41,7 @@
                                 <color key="backgroundColor" red="0.75686274509803919" green="0.0" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="ADn-aE-hVc">
-                                <rect key="frame" x="0.0" y="178" width="375" height="191"/>
+                                <rect key="frame" x="0.0" y="456" width="375" height="191"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T9U-iW-grD">
@@ -88,7 +96,7 @@
                             </view>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.69411764710000001" green="0.0" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="hCv-Gu-gJx" appends="YES" id="aOI-CM-LCf"/>
@@ -97,6 +105,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="billAmountField" destination="cv8-fx-NW2" id="16b-Ru-mxu"/>
+                        <outlet property="billAmountView" destination="CNx-w8-HNB" id="vsZ-k7-Fqc"/>
                         <outlet property="tipDetailsView" destination="ADn-aE-hVc" id="y19-J0-C3n"/>
                         <outlet property="tipLabel" destination="S8q-vi-kT9" id="uoP-w6-6gO"/>
                         <outlet property="tipPercentageControl" destination="MEl-Ox-u3j" id="JW0-Bv-Cth"/>
