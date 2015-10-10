@@ -23,13 +23,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hideTipDetails()
-        
         // Auto-focus bill input
         billAmountField.becomeFirstResponder()
         billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
         
-        // Set placeholder
+        // Set placeholder style
         let billAmountPlaceholder = NSAttributedString(string: "$", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
         billAmountField.attributedPlaceholder = billAmountPlaceholder
         
@@ -63,34 +61,36 @@ class ViewController: UIViewController {
     let damping = 0.9
     let velocity: Float = 20
     let options = UIViewAnimationOptions.CurveEaseOut
-    let billAmountViewEndPosition = CGRect(x: 0, y: 0, width: 375, height: 157)
+    
     let billAmountViewStartPosition = CGRect(x: 0, y: 294, width: 375, height: 157)
+    let billAmountViewEndPosition = CGRect(x: 0, y: 0, width: 375, height: 157)
+    
+    let tipDetailsViewStartPosition = CGRect(x: 0, y: 451, width: 375, height: 191)
+    let tipDetailsViewEndPosition = CGRect(x: 0, y: 157, width: 375, height: 191)
     
     func showTipDetails() {
-        tipDetailsView.hidden = false
-        
         UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
             self.billAmountView.frame = self.billAmountViewEndPosition
-             self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:1)
-
+            self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:1)
+            
+            self.tipDetailsView.frame = self.tipDetailsViewEndPosition
+            self.tipDetailsView.alpha = 1
+            
             }, completion: { finished in
-                // any code entered here will be applied
-                // once the animation has completed
         })
     }
     
     func hideTipDetails() {
-        tipDetailsView.hidden = true
         
         UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
             
             self.billAmountView.frame = self.billAmountViewStartPosition
             self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
-            
+
+            self.tipDetailsView.frame = self.tipDetailsViewStartPosition
+            self.tipDetailsView.alpha = 0
             
             }, completion: { finished in
-                // any code entered here will be applied
-                // once the animation has completed
         })
 
     }
