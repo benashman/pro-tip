@@ -8,29 +8,23 @@
 
 import UIKit
 
-
 extension String {
     func repeatString(n: Int) -> String {
         var output = ""
-        
         for var i in 0..<n { output += self }
-        
         return output
     }
 }
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet weak var tipDescriptionLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var billAmountField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipPercentageControl: UISegmentedControl!
-    
     @IBOutlet weak var billAmountView: UIView!
     @IBOutlet weak var tipDetailsView: UIView!
-    
     @IBOutlet weak var incrementGuestButton: UIButton!
     @IBOutlet weak var decrementGuestButton: UIButton!
     @IBOutlet weak var guestCountLabel: UILabel!
@@ -47,7 +41,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Set up views
         self.tipDetailsView.alpha = 0
@@ -71,16 +64,11 @@ class ViewController: UIViewController {
         var tipPercentage = tipPercentages[tipPercentageControl.selectedSegmentIndex]
         
         var billAmount = NSString(string: billAmountField.text!).doubleValue
-        
         var totalTip = billAmount * tipPercentage
-        
         var total = billAmount + totalTip
         var totalPerGuest = total / Double(guestCount)
         
-        print(guestCount)
-        
         var billFieldCharCount = billAmountField.text!.characters.count
-        
         billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
         
         tipLabel.text = String(format: "$%.2f", totalTip)
@@ -88,6 +76,7 @@ class ViewController: UIViewController {
         perGuestAmountLabel.text = String(format: "$%.2f", totalPerGuest)
     }
     
+    // Animation options
     let duration = 0.5
     let damping = 0.9
     let velocity: Float = 20
@@ -120,7 +109,6 @@ class ViewController: UIViewController {
     @IBAction func incrementGuestCount(sender: AnyObject) {
         guestCount++
         
-        // enable decrement button
         decrementGuestButton.alpha = 1
         decrementGuestButton.userInteractionEnabled = true
         
@@ -155,4 +143,3 @@ class ViewController: UIViewController {
     }
     
 }
-
