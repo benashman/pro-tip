@@ -2,7 +2,7 @@
 
 A simple tip calculator for iOS. Calculate tips and split bills with friends.
 
-Time spent: ~10 hours
+Time spent: ~12 hours
 
 ## Completed User Stories
 
