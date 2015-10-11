@@ -16,7 +16,7 @@ extension String {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tipDescriptionLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
@@ -42,6 +42,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.billAmountField.delegate = self
+        
         // Set up views
         self.tipDetailsView.alpha = 0
         
@@ -63,13 +65,23 @@ class ViewController: UIViewController {
         var tipPercentages = [0.18, 0.2, 0.22]
         var tipPercentage = tipPercentages[tipPercentageControl.selectedSegmentIndex]
         
-        var billAmount = NSString(string: billAmountField.text!).doubleValue
+        // Remove currency formatting before doing math
+        var strippedBillAmountString = billAmountField.text!.stringByReplacingOccurrencesOfString("$", withString: "")
+        
+        var billAmount = NSString(string: strippedBillAmountString).doubleValue
+        
         var totalTip = billAmount * tipPercentage
         var total = billAmount + totalTip
         var totalPerGuest = total / Double(guestCount)
         
         var billFieldCharCount = billAmountField.text!.characters.count
-        billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
+        print(billFieldCharCount)
+        
+        if billAmountField.text != "$0.00" {
+            showTipDetails()
+        } else {
+            hideTipDetails()
+        }
         
         tipLabel.text = String(format: "$%.2f", totalTip)
         totalLabel.text = String(format: "$%.2f", total)
@@ -95,6 +107,8 @@ class ViewController: UIViewController {
     }
     
     func hideTipDetails() {
+        billAmountField.text = ""
+        
         UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
             self.billAmountView.frame = self.billAmountViewStartPosition
             self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
@@ -134,6 +148,34 @@ class ViewController: UIViewController {
         onEditingChanged(self)
     }
     
+    
+    // TextField delegate
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var originalText = billAmountField.text! as NSString
+        var newText = originalText.stringByReplacingCharactersInRange(range, withString: string)
+        var newTextString = String(newText)
+        
+        let digits = NSCharacterSet.decimalDigitCharacterSet()
+        var digitText = ""
+        for c in newTextString.unicodeScalars {
+            if digits.longCharacterIsMember(c.value) {
+                digitText.append(c)
+            }
+        }
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        var numberFromField = (NSString(string: digitText).doubleValue)/100
+        newText = formatter.stringFromNumber(numberFromField)!
+        
+        billAmountField.text = newText
+        
+        onEditingChanged(self)
+        
+        return false
+    }
+
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
