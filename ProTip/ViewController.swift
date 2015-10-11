@@ -125,10 +125,14 @@ class ViewController: UIViewController {
     @IBAction func decrementGuestCount(sender: AnyObject) {
         if (guestCount > 1) {
             guestCount--
-        } else if (guestCount == 1) {
+            print(guestCount)
+        }
+        
+        if (guestCount == 1) {
             decrementGuestButton.alpha = 0.25
             decrementGuestButton.userInteractionEnabled = false
         }
+    
         updateNumberOfGuests(guestCount)
     }
     
