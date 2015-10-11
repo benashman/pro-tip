@@ -141,7 +141,6 @@ class ViewController: UIViewController {
     
     func updateNumberOfGuests(count: Int) {
         guestCountLabel.text = "💳".repeatString(count)
-        tipDescriptionLabel.text = "Per guest".uppercaseString
         onEditingChanged(self)
     }
     
