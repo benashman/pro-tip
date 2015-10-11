@@ -142,7 +142,7 @@ class ViewController: UIViewController {
             tipDescriptionLabel.text = "Tip"
         } else {
             guestCountLabel.text = "💳".repeatString(count)
-            tipDescriptionLabel.text = "Tip (each)"
+            tipDescriptionLabel.text = "Tip per guest"
         }
         
         onEditingChanged(self)
