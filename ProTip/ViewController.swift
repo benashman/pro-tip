@@ -23,17 +23,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Auto-focus bill input
+        // Set up views
+        self.tipDetailsView.alpha = 0
+        
         billAmountField.becomeFirstResponder()
         billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
+        
+        tipLabel.text = "$0.00"
+        totalLabel.text = "$0.00"
         
         // Set placeholder style
         let billAmountPlaceholder = NSAttributedString(string: "$", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
         billAmountField.attributedPlaceholder = billAmountPlaceholder
-        
-        // Set default labels
-        tipLabel.text = "$0.00"
-        totalLabel.text = "$0.00"
     }
     
     @IBAction func onEditingChanged(sender: AnyObject) {
@@ -41,10 +42,12 @@ class ViewController: UIViewController {
         var tipPercentage = tipPercentages[tipPercentageControl.selectedSegmentIndex]
         
         var billAmount = NSString(string: billAmountField.text!).doubleValue
+        
         var tip = billAmount * tipPercentage
         var total = billAmount + tip
         
         var billFieldCharCount = billAmountField.text!.characters.count
+        
         
         billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
         
@@ -52,10 +55,15 @@ class ViewController: UIViewController {
         totalLabel.text = String(format: "$%.2f", total)
     }
 
+    func formatCurrency(value: Double) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        return formatter.stringFromNumber(value)!
+    }
+    
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
-    
     
     let duration = 0.5
     let damping = 0.9
@@ -76,23 +84,20 @@ class ViewController: UIViewController {
             self.tipDetailsView.frame = self.tipDetailsViewEndPosition
             self.tipDetailsView.alpha = 1
             
-            }, completion: { finished in
-        })
+            }, completion: nil
+        )
     }
     
     func hideTipDetails() {
-        
         UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
-            
             self.billAmountView.frame = self.billAmountViewStartPosition
             self.billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
 
             self.tipDetailsView.frame = self.tipDetailsViewStartPosition
             self.tipDetailsView.alpha = 0
             
-            }, completion: { finished in
-        })
-
+            }, completion: nil
+        )
     }
     
     override func prefersStatusBarHidden() -> Bool {
