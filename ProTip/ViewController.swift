@@ -38,7 +38,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let tipDetailsViewStartPosition = CGRect(x: 0, y: 451, width: 375, height: 294)
     let tipDetailsViewEndPosition = CGRect(x: 0, y: 157, width: 375, height: 294)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         totalLabel.text = "$0.00"
         
         // Set placeholder style
-        let billAmountPlaceholder = NSAttributedString(string: "$", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
+        let billAmountPlaceholder = NSAttributedString(string: "$0.00", attributes: [NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)])
         billAmountField.attributedPlaceholder = billAmountPlaceholder
     }
     
@@ -74,14 +73,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var total = billAmount + totalTip
         var totalPerGuest = total / Double(guestCount)
         
-        var billFieldCharCount = billAmountField.text!.characters.count
-        print(billFieldCharCount)
-        
-        if billAmountField.text != "$0.00" {
-            showTipDetails()
-        } else {
-            hideTipDetails()
-        }
+        billAmountField.text != "$0.00" ? showTipDetails() : hideTipDetails()
         
         tipLabel.text = String(format: "$%.2f", totalTip)
         totalLabel.text = String(format: "$%.2f", total)
@@ -132,7 +124,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func decrementGuestCount(sender: AnyObject) {
         if (guestCount > 1) {
             guestCount--
-            print(guestCount)
         }
         
         if (guestCount == 1) {
@@ -147,7 +138,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         guestCountLabel.text = "💳".repeatString(count)
         onEditingChanged(self)
     }
-    
     
     // TextField delegate
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
