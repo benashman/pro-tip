@@ -8,9 +8,21 @@
 
 import UIKit
 
+
+extension String {
+    func repeatString(n: Int) -> String {
+        var output = ""
+        
+        for var i in 0..<n { output += self }
+        
+        return output
+    }
+}
+
 class ViewController: UIViewController {
     
     
+    @IBOutlet weak var tipDescriptionLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var billAmountField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
@@ -19,9 +31,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var billAmountView: UIView!
     @IBOutlet weak var tipDetailsView: UIView!
     
+    @IBOutlet weak var incrementGuestButton: UIButton!
+    @IBOutlet weak var decrementGuestButton: UIButton!
+    @IBOutlet weak var guestCountLabel: UILabel!
+    
+    var guestCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("L".repeatString(10))
         
         // Set up views
         self.tipDetailsView.alpha = 0
@@ -43,22 +62,17 @@ class ViewController: UIViewController {
         
         var billAmount = NSString(string: billAmountField.text!).doubleValue
         
-        var tip = billAmount * tipPercentage
+        var tip = billAmount * tipPercentage / Double(guestCount)
         var total = billAmount + tip
         
-        var billFieldCharCount = billAmountField.text!.characters.count
+        print(guestCount)
         
+        var billFieldCharCount = billAmountField.text!.characters.count
         
         billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
         
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
-    }
-
-    func formatCurrency(value: Double) -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
-        return formatter.stringFromNumber(value)!
     }
     
     @IBAction func onTap(sender: AnyObject) {
@@ -98,6 +112,38 @@ class ViewController: UIViewController {
             
             }, completion: nil
         )
+    }
+    
+    @IBAction func incrementGuestCount(sender: AnyObject) {
+        guestCount++
+        
+        // enable decrement button
+        decrementGuestButton.alpha = 1
+        decrementGuestButton.userInteractionEnabled = true
+        
+        updateNumberOfGuests(guestCount)
+    }
+    
+    @IBAction func decrementGuestCount(sender: AnyObject) {
+        if (guestCount > 1) {
+            guestCount--
+        } else if (guestCount == 1) {
+            decrementGuestButton.alpha = 0.25
+            decrementGuestButton.userInteractionEnabled = false
+        }
+        updateNumberOfGuests(guestCount)
+    }
+    
+    func updateNumberOfGuests(count: Int) {
+        if (count == 1) {
+            guestCountLabel.text = "💳".uppercaseString
+            tipDescriptionLabel.text = "Tip"
+        } else {
+            guestCountLabel.text = "💳".repeatString(count)
+            tipDescriptionLabel.text = "Tip (each)"
+        }
+        
+        onEditingChanged(self)
     }
     
     override func prefersStatusBarHidden() -> Bool {
