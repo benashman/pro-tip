@@ -126,9 +126,6 @@
                         <animations/>
                         <color key="backgroundColor" red="0.69411764710000001" green="0.0" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="hCv-Gu-gJx" appends="YES" id="aOI-CM-LCf"/>
-                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -145,11 +142,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="hCv-Gu-gJx">
-                    <connections>
-                        <action selector="onTap:" destination="BYZ-38-t0r" id="mRx-kK-5h2"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="hCv-Gu-gJx"/>
             </objects>
             <point key="canvasLocation" x="85.5" y="260.5"/>
         </scene>

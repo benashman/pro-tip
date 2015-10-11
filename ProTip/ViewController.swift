@@ -77,10 +77,6 @@ class ViewController: UIViewController {
         totalLabel.text = String(format: "$%.2f", total)
     }
     
-    @IBAction func onTap(sender: AnyObject) {
-        view.endEditing(true)
-    }
-    
     let duration = 0.5
     let damping = 0.9
     let velocity: Float = 20
