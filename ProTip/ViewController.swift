@@ -62,8 +62,10 @@ class ViewController: UIViewController {
         
         var billAmount = NSString(string: billAmountField.text!).doubleValue
         
-        var tip = billAmount * tipPercentage / Double(guestCount)
-        var total = billAmount + tip
+        var totalTip = billAmount * tipPercentage
+        var tipPerGuest = billAmount * tipPercentage / Double(guestCount)
+        
+        var total = billAmount + totalTip
         
         print(guestCount)
         
@@ -71,7 +73,7 @@ class ViewController: UIViewController {
         
         billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
         
-        tipLabel.text = String(format: "$%.2f", tip)
+        tipLabel.text = String(format: "$%.2f", tipPerGuest)
         totalLabel.text = String(format: "$%.2f", total)
     }
     
@@ -136,7 +138,7 @@ class ViewController: UIViewController {
     
     func updateNumberOfGuests(count: Int) {
         if (count == 1) {
-            guestCountLabel.text = "💳".uppercaseString
+            guestCountLabel.text = "💳"
             tipDescriptionLabel.text = "Tip"
         } else {
             guestCountLabel.text = "💳".repeatString(count)
