@@ -37,16 +37,25 @@ class ViewController: UIViewController {
     
     var guestCount = 1
     
+    let billAmountViewStartPosition = CGRect(x: 0, y: 294, width: 375, height: 157)
+    let billAmountViewEndPosition = CGRect(x: 0, y: 0, width: 375, height: 157)
+    
+    let tipDetailsViewStartPosition = CGRect(x: 0, y: 451, width: 375, height: 294)
+    let tipDetailsViewEndPosition = CGRect(x: 0, y: 157, width: 375, height: 294)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("L".repeatString(10))
         
         // Set up views
         self.tipDetailsView.alpha = 0
         
-        billAmountField.becomeFirstResponder()
+        billAmountView.frame = billAmountViewStartPosition
         billAmountView.backgroundColor = UIColor(red:0.81, green:0.11, blue:0.002, alpha:0)
+        billAmountField.becomeFirstResponder()
+        
+        tipDetailsView.frame = tipDetailsViewStartPosition
         
         tipLabel.text = "$0.00"
         totalLabel.text = "$0.00"
@@ -81,12 +90,6 @@ class ViewController: UIViewController {
     let damping = 0.9
     let velocity: Float = 20
     let options = UIViewAnimationOptions.CurveEaseOut
-    
-    let billAmountViewStartPosition = CGRect(x: 0, y: 294, width: 375, height: 157)
-    let billAmountViewEndPosition = CGRect(x: 0, y: 0, width: 375, height: 157)
-    
-    let tipDetailsViewStartPosition = CGRect(x: 0, y: 451, width: 375, height: 191)
-    let tipDetailsViewEndPosition = CGRect(x: 0, y: 157, width: 375, height: 191)
     
     func showTipDetails() {
         UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: options, animations: {
@@ -137,14 +140,8 @@ class ViewController: UIViewController {
     }
     
     func updateNumberOfGuests(count: Int) {
-        if (count == 1) {
-            guestCountLabel.text = "💳"
-            tipDescriptionLabel.text = "Tip"
-        } else {
-            guestCountLabel.text = "💳".repeatString(count)
-            tipDescriptionLabel.text = "Tip per guest"
-        }
-        
+        guestCountLabel.text = "💳".repeatString(count)
+        tipDescriptionLabel.text = "Per guest".uppercaseString
         onEditingChanged(self)
     }
     
