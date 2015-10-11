@@ -286,6 +286,7 @@
 				CA61CE851BC762CF0041629F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
