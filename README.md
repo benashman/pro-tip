@@ -15,6 +15,10 @@ Time spent: ~10 hours
 * [x] Optional: Images
 * [x] Optional: App icon
 
+## Notes
+
+- Had some trouble working with number formatters on the text field. Will keep trying to figure this out.
+
 ## Walkthrough
 
 ![Walkthrough](demo.gif)
