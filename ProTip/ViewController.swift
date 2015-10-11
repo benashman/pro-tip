@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var incrementGuestButton: UIButton!
     @IBOutlet weak var decrementGuestButton: UIButton!
     @IBOutlet weak var guestCountLabel: UILabel!
+    @IBOutlet weak var perGuestAmountLabel: UILabel!
     
     var guestCount = 1
     
@@ -72,9 +73,9 @@ class ViewController: UIViewController {
         var billAmount = NSString(string: billAmountField.text!).doubleValue
         
         var totalTip = billAmount * tipPercentage
-        var tipPerGuest = billAmount * tipPercentage / Double(guestCount)
         
         var total = billAmount + totalTip
+        var totalPerGuest = total / Double(guestCount)
         
         print(guestCount)
         
@@ -82,8 +83,9 @@ class ViewController: UIViewController {
         
         billFieldCharCount > 0 ? showTipDetails() : hideTipDetails()
         
-        tipLabel.text = String(format: "$%.2f", tipPerGuest)
+        tipLabel.text = String(format: "$%.2f", totalTip)
         totalLabel.text = String(format: "$%.2f", total)
+        perGuestAmountLabel.text = String(format: "$%.2f", totalPerGuest)
     }
     
     let duration = 0.5
