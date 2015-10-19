@@ -34,6 +34,27 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Split: 2 people</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>split-2</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Split: 3 people</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>split-3</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Split: 4 people</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>split-4</string>
+		</dict>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
